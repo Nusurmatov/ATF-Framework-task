@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Framework.Utils;
+using OpenQA.Selenium;
 using System.Linq;
 
 namespace Framework.Pages
@@ -6,8 +7,6 @@ namespace Framework.Pages
     public class YopMailPage : AbstractPage
     {
         public override string Url => "https://yopmail.com/";
-
-        private readonly IJavaScriptExecutor JsExecutor;
 
         private readonly By RandomEmailAddressIconLocator = By.XPath("//*[contains(@title, 'Disposable Email')]");
 
@@ -29,13 +28,13 @@ namespace Framework.Pages
 
         public IWebElement EstimatedMonthlyCostMessage => base.WaitAndFindElement(EstimatedMonthlyCostMessageLocator);
 
-        public YopMailPage(IWebDriver driver) : base(driver) => JsExecutor = (IJavaScriptExecutor)driver;
+        public YopMailPage(IWebDriver driver) : base(driver) { }
 
         public string GenerateRandomEmail(IWebDriver driver)
         {
             string temporaryEmail;
 
-            JsExecutor.ExecuteScript("window.open();");
+            JavaScriptExecutorUtil.OpenNewTab(Driver);
             driver.SwitchTo().Window(driver.WindowHandles.Last());
             base.GoTo();
             this.RandomEmailAddressIcon.Click();
@@ -50,7 +49,7 @@ namespace Framework.Pages
         {
             string message;
 
-            JsExecutor.ExecuteScript("window.open();");
+            JavaScriptExecutorUtil.OpenNewTab(Driver);
             Driver.SwitchTo().Window(Driver.WindowHandles.Last());
             base.GoTo();
             LoginTextBox.Clear();

@@ -1,9 +1,6 @@
 using NUnit.Framework;
-using OpenQA.Selenium;
 using Framework.Pages;
 using System;
-using Framework.Utils;
-using Framework.Driver;
 
 namespace Framework.Tests
 {
@@ -11,51 +8,27 @@ namespace Framework.Tests
     public class SmokeTest : BaseTest
     {
         [Test]
+        [Category("Smoke")]
+        [Category("Regression")]
         public void GoToPricingCalculaterPageTest()
         {
-            try
-            {
-                GoogleCloudMainPage.GoTo();
-                GoogleCloudMainPage.GoToPricingCalculatorPage();
-                Console.WriteLine(Driver.Title);
-               
-                Assert.IsTrue(Driver.Title.Contains("Google Cloud Pricing Calculator"));
-            }
-            catch (WebDriverException ex)
-            {
-                Steps.TakeAndSaveScreenshot(Driver);
-                Console.WriteLine(ex.StackTrace);
-               
-                Assert.Fail(ex.Message);
-            }
-            finally
-            {
-                DriverSingleton.CloseBrowser();
-            }
+            GoogleCloudMainPage.GoTo();
+            GoogleCloudMainPage.GoToPricingCalculatorPage();
+            Console.WriteLine(Driver.Title);
+
+            Assert.IsTrue(Driver.Title.Contains("Google Cloud Pricing Calculator"));
         }
 
         [Test]
+        [Category("Smoke")]
+        [Category("Regression")]
         public void LoginTest()
         {
-            try
-            {
-                GoogleCloudMainPage.GoTo();
-                GoogleCloudMainPage.SignInIcon.Click();
-                LoginPage.Login(email: YopMailPage.GenerateRandomEmail(Driver), password: "passwordToBeFailed");
+            GoogleCloudMainPage.GoTo();
+            GoogleCloudMainPage.SignInIcon.Click();
+            LoginPage.Login(email: YopMailPage.GenerateRandomEmail(Driver), password: "passwordToBeFailed");
                 
-                Assert.IsTrue(GoogleCloudMainPage.SearchBox.Displayed);
-            }
-            catch(WebDriverException ex)
-            {
-                Steps.TakeAndSaveScreenshot(Driver);
-                Console.WriteLine(ex.StackTrace);
-               
-                Assert.Fail(ex.Message);
-            }
-            finally
-            {
-                DriverSingleton.CloseBrowser();
-            }
+            Assert.IsTrue(GoogleCloudMainPage.SearchBox.Displayed);
         }
     }
 }

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<test-run id="0" runstate="Runnable" testcasecount="3" result="Failed" total="2" passed="1" failed="1" warnings="0" inconclusive="0" skipped="0" asserts="1" engine-version="3.16.0.0" clr-version="4.0.30319.42000" start-time="2022-12-23 03:22:05Z" end-time="2022-12-23 03:23:06Z" duration="61.568093">
+  <command-line><![CDATA[nunit3-console.exe  --testparam Environment=QA bin\Debug\net6.0\Framework.dll --where cat=Smoke]]></command-line>
+  <filter>
+    <cat>Smoke</cat>
+  </filter>
+  <test-suite type="Assembly" id="1-1005" name="Framework.dll" fullname="C:/Users/Xusniddin/Desktop/Khusniddin/IT/Automed Testing/LocalRepo/ATF-Framework-task/bin/Debug/net6.0/Framework.dll" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2022-12-23T03:22:06.0892655Z" end-time="2022-12-23T03:23:06.7820417Z" duration="60.692675" total="2" passed="1" failed="1" warnings="0" inconclusive="0" skipped="0" asserts="1">
+    <environment framework-version="3.13.2.0" clr-version="6.0.4" os-version="Microsoft Windows 10.0.19044" platform="Win32NT" cwd="C:\Users\Xusniddin\Desktop\Khusniddin\IT\Automed Testing\LocalRepo\ATF-Framework-task" machine-name="DESKTOP-LPRR716" user="Xusniddin" user-domain="DESKTOP-LPRR716" culture="en-US" uiculture="en-US" os-architecture="x64" />
+    <settings>
+      <setting name="DisposeRunners" value="True" />
+      <setting name="WorkDirectory" value="C:\Users\Xusniddin\Desktop\Khusniddin\IT\Automed Testing\LocalRepo\ATF-Framework-task" />
+      <setting name="TestParametersDictionary" value="[Environment, QA]">
+        <item key="Environment" value="QA" />
+      </setting>
+      <setting name="TestParameters" value="Environment=QA" />
+      <setting name="ImageRuntimeVersion" value="4.0.30319" />
+      <setting name="ImageTargetFrameworkName" value=".NETCoreApp,Version=v6.0" />
+      <setting name="ImageRequiresX86" value="False" />
+      <setting name="ImageRequiresDefaultAppDomainAssemblyResolver" value="False" />
+      <setting name="TargetRuntimeFramework" value="netcore-6.0" />
+      <setting name="NumberOfTestWorkers" value="8" />
+    </settings>
+    <properties>
+      <property name="_PID" value="9800" />
+      <property name="_APPDOMAIN" value="nunit-agent" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="TestSuite" id="1-1006" name="Framework" fullname="Framework" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2022-12-23T03:22:06.0983033Z" end-time="2022-12-23T03:23:06.7820318Z" duration="60.683728" total="2" passed="1" failed="1" warnings="0" inconclusive="0" skipped="0" asserts="1">
+      <properties />
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1-1007" name="Tests" fullname="Framework.Tests" runstate="Runnable" testcasecount="3" result="Failed" site="Child" start-time="2022-12-23T03:22:06.0987563Z" end-time="2022-12-23T03:23:06.7820134Z" duration="60.683257" total="2" passed="1" failed="1" warnings="0" inconclusive="0" skipped="0" asserts="1">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestFixture" id="1-1002" name="SmokeTest" fullname="Framework.Tests.SmokeTest" classname="Framework.Tests.SmokeTest" runstate="Runnable" testcasecount="2" result="Failed" site="Child" start-time="2022-12-23T03:22:06.1008632Z" end-time="2022-12-23T03:23:06.7812080Z" duration="60.680346" total="2" passed="1" failed="1" warnings="0" inconclusive="0" skipped="0" asserts="1">
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-case id="1-1003" name="GoToPricingCalculaterPageTest" fullname="Framework.Tests.SmokeTest.GoToPricingCalculaterPageTest" methodname="GoToPricingCalculaterPageTest" classname="Framework.Tests.SmokeTest" runstate="Runnable" seed="1253655868" result="Passed" start-time="2022-12-23T03:22:06.1047362Z" end-time="2022-12-23T03:22:33.0942337Z" duration="26.990020" asserts="1">
+            <properties>
+              <property name="Category" value="Smoke" />
+              <property name="Category" value="Regression" />
+            </properties>
+            <output><![CDATA[QA-Automation-Engineer
+Edge
+Google Cloud Pricing Calculator
+]]></output>
+          </test-case>
+          <test-case id="1-1004" name="LoginTest" fullname="Framework.Tests.SmokeTest.LoginTest" methodname="LoginTest" classname="Framework.Tests.SmokeTest" runstate="Runnable" seed="560553639" result="Failed" label="Error" start-time="2022-12-23T03:22:33.0980131Z" end-time="2022-12-23T03:23:06.7783228Z" duration="33.680310" asserts="0">
+            <properties>
+              <property name="Category" value="Smoke" />
+              <property name="Category" value="Regression" />
+            </properties>
+            <failure>
+              <message><![CDATA[OpenQA.Selenium.WebDriverTimeoutException : Timed out after 15 seconds
+  ----> OpenQA.Selenium.NoSuchElementException : no such element: Unable to locate element: {"method":"xpath","selector":"//input[contains(@aria-label,'Enter')]"}
+  (Session info: MicrosoftEdge=108.0.1462.46)]]></message>
+              <stack-trace><![CDATA[   at OpenQA.Selenium.Support.UI.DefaultWait`1.ThrowTimeoutException(String exceptionMessage, Exception lastException)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition, CancellationToken token)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition)
+   at Framework.Pages.AbstractPage.WaitAndFindElement(By locator) in C:\Users\Xusniddin\Desktop\Khusniddin\IT\Automed Testing\LocalRepo\ATF-Framework-task\Pages\AbstractPage.cs:line 27
+   at Framework.Pages.LoginPage.get_PasswordTextBox() in C:\Users\Xusniddin\Desktop\Khusniddin\IT\Automed Testing\LocalRepo\ATF-Framework-task\Pages\LoginPage.cs:line 25
+   at Framework.Pages.LoginPage.Login(String email, String password) in C:\Users\Xusniddin\Desktop\Khusniddin\IT\Automed Testing\LocalRepo\ATF-Framework-task\Pages\LoginPage.cs:line 40
+   at Framework.Tests.SmokeTest.LoginTest() in C:\Users\Xusniddin\Desktop\Khusniddin\IT\Automed Testing\LocalRepo\ATF-Framework-task\Tests\SmokeTest.cs:line 29
+--NoSuchElementException
+   at OpenQA.Selenium.WebDriver.UnpackAndThrowOnError(Response errorResponse, String commandToExecute)
+   at OpenQA.Selenium.WebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)
+   at OpenQA.Selenium.WebDriver.FindElement(String mechanism, String value)
+   at OpenQA.Selenium.By.<.ctor>b__11_0(ISearchContext context)
+   at OpenQA.Selenium.By.FindElement(ISearchContext context)
+   at OpenQA.Selenium.WebDriver.FindElement(By by)
+   at SeleniumExtras.WaitHelpers.ExpectedConditions.<>c__DisplayClass6_0.<ElementExists>b__0(IWebDriver driver)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition, CancellationToken token)]]></stack-trace>
+            </failure>
+            <output><![CDATA[QA-Automation-Engineer
+Edge
+]]></output>
+          </test-case>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

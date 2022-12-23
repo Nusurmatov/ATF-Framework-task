@@ -2,6 +2,9 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using Framework.Driver;
 using Framework.Pages;
+using System;
+using Framework.Utils;
+using NUnit.Framework.Interfaces;
 
 namespace Framework
 {
@@ -17,10 +20,19 @@ namespace Framework
 
         protected YopMailPage YopMailPage;
 
+        protected UserCreator User;
+
         [SetUp]
         public void SetUp()
         {
-            this.Driver = DriverSingleton.GetInstance(BrowserDrivers.Edge);
+            BrowserDrivers browserType;
+            var environment = TestContext.Parameters.Get("Environment", "Dev");
+            User = new UserCreator(environment);
+            Enum.TryParse(User.Browser, ignoreCase: true, out browserType);
+            Console.WriteLine(User.Name);
+            Console.WriteLine(User.Browser);
+
+            this.Driver = DriverSingleton.GetInstance(browserType);
             this.LoginPage = new LoginPage(this.Driver);
             this.GoogleCloudMainPage = new GoogleCloudMainPage(this.Driver);
             this.PricingCalculatorPage = new GoogleCloudPricingCalculatorPage(this.Driver);
@@ -30,7 +42,12 @@ namespace Framework
         [TearDown]
         public void TearDown()
         {
-           DriverSingleton.CloseBrowser();
+            if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
+            {
+                ScreenshotUtil.TakeAndSaveScreenshot(Driver);
+            }
+
+            DriverSingleton.CloseBrowser();
         }
     }
 }
