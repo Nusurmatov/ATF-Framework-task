@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Framework.Utils
 {
-    public class UserCreator
+    public class UserCreatorUtil
     {
         public string Name { get; set; }
 
@@ -11,7 +11,9 @@ namespace Framework.Utils
 
         public string Browser { get; set; }
 
-        public UserCreator(string environment)
+        private readonly string _parentPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+
+        public UserCreatorUtil(string environment)
         {
             this.Name = ExtractValueFromFile(environment, "Name");
             this.Password = ExtractValueFromFile(environment, "Password");
@@ -21,7 +23,7 @@ namespace Framework.Utils
         private string ExtractValueFromFile(string environment, string property)
         {
             string result = String.Empty;
-            using (var reader = new StreamReader(@$"C:\Users\Xusniddin\Desktop\Khusniddin\IT\Automed Testing\LocalRepo\ATF-Framework-task\Sources\{environment}.properties"))
+            using (var reader = new StreamReader(Path.Combine(_parentPath, "Sources", $"{environment}.properties")))
             {
                 string line; 
                 while ((line = reader.ReadLine()) != null)

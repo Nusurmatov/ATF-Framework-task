@@ -20,14 +20,14 @@ namespace Framework
 
         protected YopMailPage YopMailPage;
 
-        protected UserCreator User;
+        protected UserCreatorUtil User;
 
         [SetUp]
         public void SetUp()
         {
             BrowserDrivers browserType;
-            var environment = TestContext.Parameters.Get("Environment", "Dev");
-            User = new UserCreator(environment);
+            var environment = Environment.GetEnvironmentVariable("Environment");
+            User = new UserCreatorUtil(environment);
             Enum.TryParse(User.Browser, ignoreCase: true, out browserType);
             Console.WriteLine(User.Name);
             Console.WriteLine(User.Browser);
