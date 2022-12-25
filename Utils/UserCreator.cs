@@ -21,7 +21,7 @@ namespace Framework.Utils
         private string ExtractValueFromFile(string environment, string property)
         {
             string result = String.Empty;
-            using (var reader = new StreamReader(@$"Sources\{environment}.properties"))
+            using (var reader = new StreamReader(@$"C:\Users\Xusniddin\Desktop\Khusniddin\IT\Automed Testing\LocalRepo\ATF-Framework-task\Sources\{environment}.properties"))
             {
                 string line; 
                 while ((line = reader.ReadLine()) != null)

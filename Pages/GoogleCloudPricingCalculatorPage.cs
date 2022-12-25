@@ -7,41 +7,45 @@ namespace Framework.Pages
 {
     public class GoogleCloudPricingCalculatorPage : AbstractPage
     {
-        private readonly By InstanceFieldLocator = By.Id("input_90");
+        private readonly By FirstIFrameLocator = By.XPath("//devsite-iframe/child::iframe");
 
-        private readonly By OperatingSystemOrSoftwareSelectIconLocator = By.XPath("//*[@id='select_value_label_82']/descendant::span[@class='md-select-icon']");
+        private readonly By SecondIFrameLocator = By.Id("myFrame");
 
-        private readonly By OperatingSystemOrSoftwareSelectOptionsLocator = By.XPath("//*[@id='select_container_104']/descendant::md-option");
+        private readonly By InstanceFieldLocator = By.XPath("//*[contains(@ng-model, 'computeServer.quantity')]");
 
-        private readonly By ProvisionModelSelectIconLocator = By.XPath("//*[@id='select_value_label_83']/descendant::span[@class='md-select-icon']");
+        private readonly By OperatingSystemOrSoftwareSelectIconLocator = By.XPath("//*[contains(@aria-label, 'Operating System')]/descendant::span[@class='md-select-icon']");
 
-        private readonly By ProvisionModelSelectOptionsLocator = By.XPath("//*[@id='select_container_108']/descendant::md-option");
+        private readonly By OperatingSystemOrSoftwareSelectOptionsLocator = By.XPath("//md-option[@value='free'] | //md-option[@value='free']/following-sibling::md-option");
 
-        private readonly By MachineTypeSelectIconLocator = By.XPath("//*[@id='select_value_label_86']/descendant::span[@class='md-select-icon']");
+        private readonly By ProvisionModelSelectIconLocator = By.XPath("//*[contains(@aria-label, 'VM Class')]/descendant::span[@class='md-select-icon']");
 
-        private readonly By MachineTypeSelectOptionsLocator = By.XPath("//*[@id='select_container_118']/descendant::md-option");
+        private readonly By ProvisionModelSelectOptionsLocator = By.XPath("//md-option[@value='regular'] | //md-option[@value='regular']/following-sibling::md-option");
+
+        private readonly By MachineTypeSelectIconLocator = By.XPath("//*[contains(@aria-label, 'Instance type')]/descendant::span[@class='md-select-icon']");
+
+        private readonly By MachineTypeSelectOptionsLocator = By.XPath("//md-option[@ng-repeat='instance in typeInfo'] ");
 
         private readonly By AddGpusCheckboxLocator = By.XPath("//*[@aria-label='Add GPUs' and @aria-disabled='false']");
 
         private readonly By GpuTypeSelectIconLocator = By.XPath("//*[@aria-label='GPU type']");
 
-        private readonly By GpuTypeSelectOptionsLocator = By.XPath("//*[@id='select_container_423']/descendant::md-option");
+        private readonly By GpuTypeSelectOptionsLocator = By.XPath("//md-option[contains(@value, 'NVIDIA')] ");
 
-        private readonly By NumberOfGpusSelectIconLocator = By.XPath("//*[@id='select_424']/descendant::span[@class='md-select-icon']");
+        private readonly By NumberOfGpusSelectIconLocator = By.XPath("//*[@placeholder='Number of GPUs']/descendant::span[@class='md-select-icon']");
 
-        private readonly By NumberOfSelectOptionsLocator = By.XPath("//*[@id='select_container_425']/descendant::md-option");
+        private readonly By NumberOfSelectOptionsLocator = By.XPath("//md-option[contains(@ng-repeat, 'supportedGpuNumbers')]");
 
-        private readonly By LocalSddSelectIconLocator = By.XPath("//*[@id='select_value_label_133']/descendant::span[@class='md-select-icon']");
+        private readonly By LocalSddSelectIconLocator = By.XPath("//*[contains(@aria-label, 'Local SSD')]/descendant::span[@class='md-select-icon']");
 
-        private readonly By LocalSddSelectOptionsLocator = By.XPath("//*[@id='select_container_151']/descendant::md-option");
+        private readonly By LocalSddSelectOptionsLocator = By.XPath("//*[contains(@ng-repeat, 'supportedGpuNumbers')]/parent::md-content/following::md-option");
 
-        private readonly By DataCenterLocationSelectIconLocator = By.XPath("//*[@id='select_value_label_134']/descendant::span[@class='md-select-icon']");
+        private readonly By DataCenterLocationSelectIconLocator = By.XPath("//*[contains(@ng-model, 'soleTenant.location')]/descendant::span[@class='md-select-icon']");
 
-        private readonly By DataCenterLocationSelectOptionsLocator = By.XPath("//*[@id='select_container_154']/descendant::md-option");
+        private readonly By DataCenterLocationSelectOptionsLocator = By.XPath("//*[contains(@ng-repeat, 'inputRegionText.soleTenant')]");
 
-        private readonly By CommittedUsageSelectIconLocator = By.XPath("//*[@id='select_value_label_135']/descendant::span[@class='md-select-icon']");
+        private readonly By CommittedUsageSelectIconLocator = By.XPath("//*[contains(@aria-label, 'Committed') and contains(@ng-change, 'soleTenant')]/descendant::span[@class='md-select-icon']");
 
-        private readonly By CommittedUsageSelectOptionsLocator = By.XPath("//*[@id='select_container_159']/descendant::md-option");
+        private readonly By CommittedUsageSelectOptionsLocator = By.XPath("//md-option[contains(@ng-disabled, 'soleTenant.nodeType')] | //md-option[contains(@ng-disabled, 'soleTenant.nodeType')]/following-sibling::md-option");
 
         private readonly By AddToEstimateButtonLocator = By.XPath("//*[@aria-label='Add to Estimate' and not(contains(@disabled, 'disabled'))]");
 
@@ -52,6 +56,10 @@ namespace Framework.Pages
         private readonly By SendEmailButtonLocator = By.XPath("//*[@aria-label='Send Email']");
 
         private readonly By TotalEstimatedCostLocator = By.XPath("//b[contains(text(), 'Total Estimated Cost:')]");
+
+        public IWebElement FirstIFrame => base.WaitAndFindElement(FirstIFrameLocator);
+
+        public IWebElement SecondIFrame => base.WaitAndFindElement(SecondIFrameLocator);
 
         public IWebElement InstanceField => base.WaitAndFindElement(InstanceFieldLocator);
 
@@ -89,7 +97,7 @@ namespace Framework.Pages
         }
 
         public IWebElement AddGpusCheckBox => base.WaitAndFindElement(AddGpusCheckboxLocator);
-
+        
         public IWebElement GpuTypeSelectIcon => base.WaitAndFindElement(GpuTypeSelectIconLocator);
 
         public ReadOnlyCollection<IWebElement> GpuTypesSelectOptions
@@ -159,8 +167,8 @@ namespace Framework.Pages
 
         public void EnterValuesOfComputeEngine(ComputeEngine computeEngine)
         {
-            Driver.SwitchTo().Frame(Driver.FindElement(By.XPath("//devsite-iframe/child::iframe")));
-            Driver.SwitchTo().Frame("myFrame");
+            Driver.SwitchTo().Frame(FirstIFrame);
+            Driver.SwitchTo().Frame(SecondIFrame);
 
             InstanceField.Click();
             InstanceField.SendKeys(computeEngine.NumberOfInstances);

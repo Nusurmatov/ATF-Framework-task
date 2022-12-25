@@ -8,11 +8,11 @@ namespace Framework.Pages
 
         private readonly By EmailSubmitIconLoc = By.Id("identifierNext");
 
-        private readonly By ErrorEmailTextLoc = By.XPath("//div[contains((text()),'Enter a') or contains(text(), 'find your')]");
+        private readonly By PasswordSubmitIconLoc = By.Id("passwordNext");
 
         public readonly By PasswordTextBoxLoc = By.XPath("//input[contains(@aria-label,'Enter')]");
 
-        private readonly By PasswordSubmitIconLoc = By.Id("passwordNext");
+        private readonly By ErrorEmailTextLoc = By.XPath("//div[contains((text()),'Enter a') or contains(text(), 'find your')]");
 
         private readonly By ErrorPasswordTextLoc = By.XPath("//span[contains(text(),'Wrong password') or contains(text(),'Enter a password')]");
 
