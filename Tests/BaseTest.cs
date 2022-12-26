@@ -26,7 +26,7 @@ namespace Framework
         public void SetUp()
         {
             BrowserDrivers browserType;
-            var environment = Environment.GetEnvironmentVariable("Environment");
+            var environment = Environment.GetEnvironmentVariable("Environment") ?? "Dev";
             User = new UserCreatorUtil(environment);
             Enum.TryParse(User.Browser, ignoreCase: true, out browserType);
             Console.WriteLine(User.Name);
